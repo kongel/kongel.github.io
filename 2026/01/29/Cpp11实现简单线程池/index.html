@@ -19,21 +19,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="直接给出结果,具体实现 锁和互斥操作实现均使用Cpp11的接口,不是linux的 线程池的实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081">
+    <meta name="description" content="直接给出结果,具体实现 锁和互斥操作实现均使用Cpp11的接口,不是linux的 线程池的实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Cpp11实现简单线程池">
 <meta property="og:url" content="http://example.com/2026/01/29/Cpp11%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="直接给出结果,具体实现 锁和互斥操作实现均使用Cpp11的接口,不是linux的 线程池的实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081">
+<meta property="og:description" content="直接给出结果,具体实现 锁和互斥操作实现均使用Cpp11的接口,不是linux的 线程池的实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-01-29T08:06:19.856Z">
-<meta property="article:modified_time" content="2026-01-29T08:05:34.004Z">
+<meta property="article:published_time" content="2026-01-29T08:10:00.000Z">
+<meta property="article:modified_time" content="2026-01-29T08:10:26.985Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo</title>
+  <title>Cpp11实现简单线程池 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="Cpp11实现简单线程池"></span>
           
         </div>
 
@@ -210,7 +211,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-29 16:06" pubdate>
+        <time datetime="2026-01-29 16:10" pubdate>
           January 29, 2026 pm
         </time>
       </span>
@@ -270,12 +271,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">Cpp11实现简单线程池</h1>
             
             
               <div class="markdown-body">
                 
-                <p>直接给出结果,具体实现</p>
+                <hr>
+<p>直接给出结果,具体实现</p>
 <p>锁和互斥操作实现均使用Cpp11的接口,不是linux的</p>
 <h1 id="线程池的实现"><a href="#线程池的实现" class="headerlink" title="线程池的实现"></a>线程池的实现</h1><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">/*</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">线程数组</span><br><span class="hljs-comment">任务队列</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;mutex&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;thread&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;condition_variable&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span><span class="hljs-comment">//任务队列</span></span><br><br> <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadPool</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">ThreadPool</span>(<span class="hljs-type">int</span> numThreads=<span class="hljs-number">8</span>):<span class="hljs-built_in">stop</span>(<span class="hljs-literal">false</span>)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;numThreads;i++)&#123;<br>            threads.<span class="hljs-built_in">emplace_back</span>([<span class="hljs-keyword">this</span>]()&#123; <br>                <span class="hljs-keyword">for</span>(;;)&#123;<br>                    unique_lock&lt;mutex&gt; <span class="hljs-built_in">lock</span>(m);<span class="hljs-comment">//每次循环结束,自动析构</span><br>                    cv.<span class="hljs-built_in">wait</span>(lock,[<span class="hljs-keyword">this</span>]()&#123;<br>                        <span class="hljs-keyword">return</span> !tasks.<span class="hljs-built_in">empty</span>() || stop;<br>                    &#125;);<br>                    <span class="hljs-keyword">if</span>(stop &amp;&amp; tasks.<span class="hljs-built_in">empty</span>())&#123;<br>                        <span class="hljs-keyword">return</span>;<br>                    &#125;<br>                    function&lt;<span class="hljs-built_in">void</span>()&gt; task=tasks.<span class="hljs-built_in">front</span>();<br>                    tasks.<span class="hljs-built_in">pop</span>();<br>                    lock.<span class="hljs-built_in">unlock</span>();<span class="hljs-comment">//这里wait返回后,一定是有锁的状态</span><br>                    <span class="hljs-built_in">task</span>();<br>                    <br>                &#125;<br>            &#125;);<br>        &#125;<br>    &#125;<br>    ~<span class="hljs-built_in">ThreadPool</span>()&#123;<br>        &#123;<br>            <span class="hljs-function">unique_lock&lt;mutex&gt; <span class="hljs-title">lock</span><span class="hljs-params">(m)</span></span>;<span class="hljs-comment">//局部的锁,只管控stop这一个互斥资源</span><br>            stop=<span class="hljs-literal">true</span>;<br>        &#125;<br>        cv.<span class="hljs-built_in">notify_all</span>();<span class="hljs-comment">//没有获取锁和释放锁的过程,仅仅通知其他线程满足某个条件</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span>&amp; thread:threads)&#123;<br>            thread.<span class="hljs-built_in">join</span>();<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//函数的参数和函数绑定在一起后,再调用这个函数,都不需要传参数 bind?</span><br>    <span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> F,<span class="hljs-keyword">class</span>... Args&gt;</span><br><span class="hljs-function">    <span class="hljs-type">void</span> <span class="hljs-title">addTask</span><span class="hljs-params">(F&amp;&amp; f,Args&amp;&amp;... args)</span></span>&#123;<br>        function&lt;<span class="hljs-type">void</span>()&gt; task=<span class="hljs-built_in">bind</span>(forward&lt;F&gt;(f),forward&lt;Args&gt;(args)...);<span class="hljs-comment">//参数包展开,不能直接,运算归于,只是用做参数传递  在函数参数列表中，表达式后面加上 ...，即可对参数包的每个元素都调用该表达式。</span><br><br>        &#123;<br>            <span class="hljs-function">unique_lock&lt;mutex&gt; <span class="hljs-title">lock</span><span class="hljs-params">(m)</span></span>;<br>            tasks.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">move</span>(task));<br>        &#125;<br>        cv.<span class="hljs-built_in">notify_one</span>();<br>    &#125;<br><span class="hljs-keyword">private</span>:<br>    std::vector&lt;std::thread&gt; threads;<span class="hljs-comment">//线程数组</span><br>    queue&lt;function&lt;<span class="hljs-type">void</span>()&gt;&gt; tasks;<span class="hljs-comment">//任务队列</span><br>    mutex m;<span class="hljs-comment">//无论访问队列、push/pop任务，还是读写 stop，都用同一个锁 m</span><br>    condition_variable cv;<span class="hljs-comment">//任务来了通知线程数组</span><br>    <span class="hljs-type">bool</span> stop;<span class="hljs-comment">//线程池是否终止</span><br> &#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-function">ThreadPool <span class="hljs-title">pool</span><span class="hljs-params">(<span class="hljs-number">4</span>)</span></span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>            pool.<span class="hljs-built_in">addTask</span>([i]()&#123;<br>                this_thread::<span class="hljs-built_in">sleep_for</span>(chrono::<span class="hljs-built_in">seconds</span>(<span class="hljs-number">1</span>));<br>                cout&lt;&lt;<span class="hljs-string">&quot;hello world&quot;</span>&lt;&lt;i&lt;&lt;endl;<br>            &#125;);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
 <h2 id="对于condition-variable理解"><a href="#对于condition-variable理解" class="headerlink" title="对于condition_variable理解"></a>对于condition_variable理解</h2><p> condition_variable的wait做了什么<br> 所以第25行lock上锁后,执行到wait时,本线程一定持有锁,如果wait检查到条件不满足,就会释放锁,然后等待唤醒,如果他被唤醒了,就会一直尝试获取锁,所以wait返回后一定是持有锁,并且条件满足的情况</p>
@@ -381,6 +383,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+      
+    </div>
+  
 </div>
 
 
@@ -389,7 +398,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>Cpp11实现简单线程池</div>
       <div>http://example.com/2026/01/29/Cpp11实现简单线程池/</div>
     </div>
     <div class="license-meta">
